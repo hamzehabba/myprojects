@@ -15,10 +15,6 @@ urlpatterns=[
 
 ]
 
-# router = DefaultRouter()
-# router.register(r'users', UserViewSet)
-# router.register(r'products', ProductViewSet)
-# router.register(r'licenses', LicenseViewSet)
 
 
 

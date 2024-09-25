@@ -36,29 +36,54 @@
 # plt.show()
 
 
-def append_if_in_range(count, sum3):
-    # اگر count بین 1 تا 11 بود
-    if 1 <= count <= 11:
+
+first_list=[]
+def append_if_in_range(count, sum3,first_list):
+    first_list.append(count)
+    if len(first_list) > 100:
+        first_list.pop(0)
+    if first_list[-1]== 0:
+        count= first_list[-2]
+
         # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
         if len(sum3) > 0 and count > max(sum3):
             sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
-        # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+            # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
         elif len(sum3) > 0 and count < min(sum3):
             sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
         sum3.append(count)  # سپس count را به لیست اضافه کن
 
     # بررسی تعداد تکرارها در sum3
-    for item in sum3:
-        if sum3.count(item) == 3:
-            return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+    if len (sum3) == 3:
+        return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
 
-    return sum3  # اگر عددی 3 بار تکرار نشده باشد، لیست به روز شده برگردانده می‌شود
 
 
 # مثال از استفاده:
 sum3_list = []
-print(append_if_in_range(6, sum3_list))  # عدد 6 اضافه می‌شود
-print(append_if_in_range(7, sum3_list))  # عدد 7 بزرگتر از 6 است، پس 6 پاک و 7 اضافه می‌شود
-print(append_if_in_range(5, sum3_list))  # عدد 5 کوچکتر از 7 است، پس 7 پاک و 5 اضافه می‌شود
-print(append_if_in_range(5, sum3_list))  # دوباره 5 اضافه می‌شود
-print(append_if_in_range(5, sum3_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+first_list=[]
+
+print(append_if_in_range(6, sum3_list,first_list))  # عدد 6 اضافه می‌شود
+print(append_if_in_range(7, sum3_list,first_list))  # عدد 7 بزرگتر از 6 است، پس 6 پاک و 7 اضافه می‌شود
+print(append_if_in_range(5, sum3_list,first_list))  # عدد 5 کوچکتر از 7 است، پس 7 پاک و 5 اضافه می‌شود
+print(append_if_in_range(5, sum3_list,first_list))  # دوباره 5 اضافه می‌شود
+print(append_if_in_range(5, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+
+print(append_if_in_range(3, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(3, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(3, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(2, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(2, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(2, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+
+# print(append_if_in_range(3, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+# print(append_if_in_range(0, sum3_list,first_list))  # سومین بار 5 اضافه می‌شود و لیست برگردانده می‌شود
+# print(append_if_in_range(5, sum3_list,first_list))  # دوباره 5 اضافه می‌شود
+

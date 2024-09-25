@@ -92,25 +92,27 @@ def convert_count(hour):
     else:
         return -1
 
-def append_if_in_range(count, sum3):
-    # اگر count بین 1 تا 11 بود
-    if 1 <= count <= 11:
+
+def append_if_in_range(count, sum3, first_list):
+    first_list.append(count)
+    if len(first_list) > 100:
+        first_list.pop(0)
+    if first_list[-1] == 0:
+        count = first_list[-2]
+
         # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
         if len(sum3) > 0 and count > max(sum3):
             sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
-        # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+            # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
         elif len(sum3) > 0 and count < min(sum3):
             sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
         sum3.append(count)  # سپس count را به لیست اضافه کن
 
     # بررسی تعداد تکرارها در sum3
-    for item in sum3:
-        if sum3.count(item) == 3:
-            return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+    if len(sum3) == 3:
+        return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
 
-    return sum3  # اگر عددی 3 بار تکرار نشده باشد، لیست به روز شده برگردانده می‌شود
 
-    # print(f"Current Time: {current_time.strftime('%Y-%m-%d %H:%M:%S')}, Count: {count}")
 # حلقه اصلی برای به‌روزرسانی قیمت بیت‌کوین و بررسی پیام‌های تلگرام
 async def main():
     bot_token = '7390882203:AAFap8oDw5Ole-dfmX46jZe6oN8Z6zzxmPo'
@@ -129,6 +131,8 @@ async def main():
     massage_hour = []
 
     final_count = 4
+
+    first_list = []
     sum3=[]
     while True:
         current_time = datetime.now()
@@ -222,7 +226,7 @@ async def main():
                     final_message = f'number: {down_count} : {up_down_for_another_chanel}'
                     await send_to_telegram_async(bot_token, notification_chat_id, final_message)
 
-                send_sum_3_number=append_if_in_range(down_count,sum3)
+                send_sum_3_number=append_if_in_range(down_count,sum3,first_list)
                 if send_sum_3_number:
                     sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
                     await send_to_telegram_async(bot_token, notification_chat_id, sum3_number)
