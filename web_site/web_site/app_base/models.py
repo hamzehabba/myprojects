@@ -28,6 +28,10 @@ class Product(models.Model):
         return {
             'title': self.title,
             'description': self.discription,
-            'image':self.image
+            'price': self.price,
+            'published_date':self.published_date,
+            # 'image':self.image
+            'image_url': self.image.url if self.image else None
+
         }
 

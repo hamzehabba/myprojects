@@ -26,9 +26,10 @@
         }
     </style>
 </head>
-<body>
+<body >
     <h1>Users from API</h1>
     <div id="data"></div>
+<!--    <img src="media/media/setpic/image_2.png" alt="دختر سوار بر اسب">-->
 
     <script>
         // URL API خود را جایگزین کنید
@@ -55,7 +56,10 @@
                     const userHtml = data.map(user => `
                         <div class="user">
                             <h2>${user.title}</h2>
-                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>توضیحات:</strong> ${user.description}</p>
+                            <p><strong>قیمت:</strong> ${user.price}</p>
+                            <p><strong>date:</strong> ${user.published_date}</p>
+                            <p><strong>عکس محصول:</strong> <img src=${user.image_url}></p>
                         </div>
                     `).join('');
 
