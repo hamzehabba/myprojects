@@ -92,6 +92,24 @@ def convert_count(hour):
     else:
         return -1
 
+def append_if_in_range(count, sum3):
+    # اگر count بین 1 تا 11 بود
+    if 1 <= count <= 11:
+        # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
+        if len(sum3) > 0 and count > max(sum3):
+            sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
+        # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+        elif len(sum3) > 0 and count < min(sum3):
+            sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
+        sum3.append(count)  # سپس count را به لیست اضافه کن
+
+    # بررسی تعداد تکرارها در sum3
+    for item in sum3:
+        if sum3.count(item) == 3:
+            return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+
+    return sum3  # اگر عددی 3 بار تکرار نشده باشد، لیست به روز شده برگردانده می‌شود
+
     # print(f"Current Time: {current_time.strftime('%Y-%m-%d %H:%M:%S')}, Count: {count}")
 # حلقه اصلی برای به‌روزرسانی قیمت بیت‌کوین و بررسی پیام‌های تلگرام
 async def main():
@@ -111,7 +129,7 @@ async def main():
     massage_hour = []
 
     final_count = 4
-
+    sum3=[]
     while True:
         current_time = datetime.now()
         current_hour = current_time.hour
@@ -196,18 +214,6 @@ async def main():
                     up_count = 0
                     up_down_for_another_chanel = []
 
-                # b = all('UP' == i for i in up_down_for_another_chanel) or all(
-                #     'DOWN' == i for i in up_down_for_another_chanel)
-                # if b and len(up_down_for_another_chanel) >= 4:
-                #     if down_count == final_count or up_count == final_count:
-                #         final_message = f"number : 1-4 : {up_down_for_another_chanel}"
-                #         await send_to_telegram_async(bot_token, notification_chat_id, final_message)
-                #
-                #     elif down_count > final_count or up_count > final_count:
-                #         final_message = f'number: {down_count or up_count} : {up_down_for_another_chanel}'
-                #         await send_to_telegram_async(bot_token, notification_chat_id, final_message)
-                # else:
-                #     up_down_for_another_chanel = []
                 if down_count == final_count:
                     final_message = f"number : 1-4 : {up_down_for_another_chanel}"
                     await send_to_telegram_async(bot_token, notification_chat_id, final_message)
@@ -215,6 +221,11 @@ async def main():
                 elif down_count > final_count:
                     final_message = f'number: {down_count} : {up_down_for_another_chanel}'
                     await send_to_telegram_async(bot_token, notification_chat_id, final_message)
+
+                send_sum_3_number=append_if_in_range(down_count,sum3)
+                if send_sum_3_number:
+                    sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
+                    await send_to_telegram_async(bot_token, notification_chat_id, sum3_number)
 
             await asyncio.sleep(0.2)  # تاخیر کوتاه بین هر حلقه
 
