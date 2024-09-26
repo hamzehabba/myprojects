@@ -92,7 +92,7 @@ def convert_count(hour):
     else:
         return -1
 
-
+# حساب و کتاب مروبط به سه بار تکرار شدن
 def append_if_in_range(count, sum3, first_list):
     first_list.append(count)
     if len(first_list) > 100:
@@ -112,7 +112,35 @@ def append_if_in_range(count, sum3, first_list):
     if len(sum3) == 3:
         return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
 
-
+def username_chanels(sum3):
+    if sum3[0]== 0:
+        return
+    elif sum3[0]== 1:
+        return
+    elif sum3[0]== 2:
+        return
+    elif sum3[0]== 3:
+        return
+    elif sum3[0]== 4:
+        return
+    elif sum3[0]== 5:
+        return
+    elif sum3[0]== 6:
+        return
+    elif sum3[0]== 7:
+        return
+    elif sum3[0]== 8:
+        return
+    elif sum3[0]== 9:
+        return
+    elif sum3[0]== 10:
+        return
+    elif sum3[0]== 11:
+        return
+    elif sum3[0]== 12:
+        return
+    elif sum3[0]>= 13:
+        return
 # حلقه اصلی برای به‌روزرسانی قیمت بیت‌کوین و بررسی پیام‌های تلگرام
 async def main():
     bot_token = '7390882203:AAFap8oDw5Ole-dfmX46jZe6oN8Z6zzxmPo'
@@ -229,6 +257,7 @@ async def main():
                 send_sum_3_number=append_if_in_range(down_count,sum3,first_list)
                 if send_sum_3_number:
                     sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
+
                     await send_to_telegram_async(bot_token, notification_chat_id, sum3_number)
 
             await asyncio.sleep(0.2)  # تاخیر کوتاه بین هر حلقه
