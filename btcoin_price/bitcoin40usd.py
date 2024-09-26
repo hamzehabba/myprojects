@@ -114,17 +114,17 @@ def append_if_in_range(count, sum3, first_list):
 
 def username_chanels(sum3):
     if sum3[0]== 0:
-        return
+        return '@+8SPQ0UUZq0o4ZWU0'
     elif sum3[0]== 1:
-        return
+        return '@elchan_1'
     elif sum3[0]== 2:
-        return
+        return '@chane_2'
     elif sum3[0]== 3:
-        return
+        return '@+nae6YKbTmLRkMDJk'
     elif sum3[0]== 4:
         return
     elif sum3[0]== 5:
-        return
+        return '@chane_5'
     elif sum3[0]== 6:
         return
     elif sum3[0]== 7:
@@ -257,8 +257,8 @@ async def main():
                 send_sum_3_number=append_if_in_range(down_count,sum3,first_list)
                 if send_sum_3_number:
                     sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
-
-                    await send_to_telegram_async(bot_token, notification_chat_id, sum3_number)
+                    user_chanel=username_chanels(sum3)
+                    await send_to_telegram_async(bot_token, user_chanel, sum3_number)
 
             await asyncio.sleep(0.2)  # تاخیر کوتاه بین هر حلقه
 
