@@ -26,12 +26,12 @@ class Product(models.Model):
 
     def api(self):
         return {
+            'author':self.author.username if self.author else None,
             'title': self.title,
             'description': self.discription,
             'price': self.price,
             'published_date':self.published_date,
             # 'image':self.image
             'image_url': self.image.url if self.image else None
-
         }
 

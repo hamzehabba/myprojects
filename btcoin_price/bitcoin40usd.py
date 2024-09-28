@@ -109,36 +109,36 @@ def append_if_in_range(count, sum3, first_list):
         sum3.append(count)  # سپس count را به لیست اضافه کن
 
     # بررسی تعداد تکرارها در sum3
-    if len(sum3) == 3:
+    if 0<= len(sum3) <= 13:
         return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
 
 def username_chanels(sum3):
     if sum3[0]== 0:
-        return '@+8SPQ0UUZq0o4ZWU0'
+        return '@chnel_0'
     elif sum3[0]== 1:
         return '@elchan_1'
     elif sum3[0]== 2:
         return '@chane_2'
     elif sum3[0]== 3:
-        return '@+nae6YKbTmLRkMDJk'
+        return '@chane_3'
     elif sum3[0]== 4:
-        return
+        return '@alitestchar'
     elif sum3[0]== 5:
         return '@chane_5'
     elif sum3[0]== 6:
-        return
+        return '@chanll_6'
     elif sum3[0]== 7:
-        return
+        return '@ailtesthft'
     elif sum3[0]== 8:
-        return
+        return '@alitesthsdt'
     elif sum3[0]== 9:
-        return
+        return '@alitestnoh'
     elif sum3[0]== 10:
-        return
+        return '@alitestdah'
     elif sum3[0]== 11:
-        return
+        return '@alitesteazdh'
     elif sum3[0]== 12:
-        return
+        return'@chanll_12'
     elif sum3[0]>= 13:
         return
 # حلقه اصلی برای به‌روزرسانی قیمت بیت‌کوین و بررسی پیام‌های تلگرام
@@ -256,9 +256,11 @@ async def main():
 
                 send_sum_3_number=append_if_in_range(down_count,sum3,first_list)
                 if send_sum_3_number:
-                    sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
+                    sum3_number= f'عدد: {sum3[0]} : {len(sum3)} مرتبه اتفاق افتاد'
+                    # sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
                     user_chanel=username_chanels(sum3)
                     await send_to_telegram_async(bot_token, user_chanel, sum3_number)
+                    # sum3 = []
 
             await asyncio.sleep(0.2)  # تاخیر کوتاه بین هر حلقه
 
