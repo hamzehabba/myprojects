@@ -92,7 +92,27 @@ def convert_count(hour):
     else:
         return -1
 
-# حساب و کتاب مروبط به سه بار تکرار شدن
+# # حساب و کتاب مروبط به سه بار تکرار شدن
+# def append_if_in_range(count, sum3, first_list):
+#     first_list.append(count)
+#     if len(first_list) > 100:
+#         first_list.pop(0)
+#     if first_list[-1] == 0:
+#         count = first_list[-2]
+#
+#         # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
+#         if len(sum3) > 0 and count > max(sum3):
+#             sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
+#             # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+#         elif len(sum3) > 0 and count < min(sum3):
+#             sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
+#         sum3.append(count)  # سپس count را به لیست اضافه کن
+#
+#     # بررسی تعداد تکرارها در sum3
+#     if 0< len(sum3) <= 13:
+#         return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+
+
 def append_if_in_range(count, sum3, first_list):
     first_list.append(count)
     if len(first_list) > 100:
@@ -100,17 +120,23 @@ def append_if_in_range(count, sum3, first_list):
     if first_list[-1] == 0:
         count = first_list[-2]
 
+        # اگر count مساوی 0 بود از آن عبور کن
+        if count == 0:
+            return  # Count را نادیده می‌گیریم و ادامه نمی‌دهیم
         # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
         if len(sum3) > 0 and count > max(sum3):
             sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
-            # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+        # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
         elif len(sum3) > 0 and count < min(sum3):
             sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
-        sum3.append(count)  # سپس count را به لیست اضافه کن
+
+        # سپس count را به لیست اضافه کن
+        sum3.append(count)
 
     # بررسی تعداد تکرارها در sum3
-    if 0<= len(sum3) <= 13:
+    if 0 < len(sum3) <= 13:
         return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+
 
 def username_chanels(sum3):
     if sum3[0]== 0:
