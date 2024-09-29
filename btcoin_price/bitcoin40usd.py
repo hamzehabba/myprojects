@@ -92,34 +92,56 @@ def convert_count(hour):
     else:
         return -1
 
-# # حساب و کتاب مروبط به سه بار تکرار شدن
+
 # def append_if_in_range(count, sum3, first_list):
 #     first_list.append(count)
 #     if len(first_list) > 100:
 #         first_list.pop(0)
-#     if first_list[-1] == 0:
-#         count = first_list[-2]
 #
+#     if first_list[-1] == 0:
+#
+#         # بررسی اینکه آیا لیست صفر دارد یا نه
+#         if first_list.count(0) > 1:
+#             # پیدا کردن اولین موقعیت صفر از آخر به جلو و حذف سایر صفرها
+#             last_zero_index = len(first_list) - 1 - first_list[::-1].index(0)
+#             [x for i, x in enumerate(first_list) if x != 0 or i == last_zero_index]
+#         count = first_list[-2]
+#         # اگر count مساوی 0 بود از آن عبور کن
+#         if count == 0:
+#             return  # Count را نادیده می‌گیریم و ادامه نمی‌دهیم
 #         # اگر لیست خالی نیست و count بزرگتر از آخرین عنصر لیست است
 #         if len(sum3) > 0 and count > max(sum3):
 #             sum3.clear()  # اگر count بزرگ‌تر بود، لیست را خالی کن
-#             # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
+#         # اگر لیست خالی نیست و count کوچکتر از کوچکترین عنصر لیست است
 #         elif len(sum3) > 0 and count < min(sum3):
 #             sum3.clear()  # اگر count کوچکتر بود، لیست را خالی کن
-#         sum3.append(count)  # سپس count را به لیست اضافه کن
+#
+#         # سپس count را به لیست اضافه کن
+#         sum3.append(count)
 #
 #     # بررسی تعداد تکرارها در sum3
-#     if 0< len(sum3) <= 13:
+#     if 0 < len(sum3) <= 13:
+#
 #         return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
 
+# تعریف یک متغیر خارج از تابع برای ذخیره آخرین مقدار برگردانده شده
+last_returned_sum3 = None
 
 def append_if_in_range(count, sum3, first_list):
+    global last_returned_sum3  # استفاده از متغیر سراسری برای ذخیره آخرین مقدار
+
     first_list.append(count)
     if len(first_list) > 100:
         first_list.pop(0)
-    if first_list[-1] == 0:
-        count = first_list[-2]
 
+    if first_list[-1] == 0:
+
+        # بررسی اینکه آیا لیست صفر دارد یا نه
+        if first_list.count(0) > 1:
+            # پیدا کردن اولین موقعیت صفر از آخر به جلو و حذف سایر صفرها
+            last_zero_index = len(first_list) - 1 - first_list[::-1].index(0)
+            [x for i, x in enumerate(first_list) if x != 0 or i == last_zero_index]
+        count = first_list[-2]
         # اگر count مساوی 0 بود از آن عبور کن
         if count == 0:
             return  # Count را نادیده می‌گیریم و ادامه نمی‌دهیم
@@ -135,8 +157,12 @@ def append_if_in_range(count, sum3, first_list):
 
     # بررسی تعداد تکرارها در sum3
     if 0 < len(sum3) <= 13:
-        return sum3  # اگر عددی 3 بار تکرار شد، لیست را برگردان
+        # اگر مقدار جدید با آخرین مقدار بازگردانده شده برابر نیست، آن را بازگردان
+        if sum3 != last_returned_sum3:
+            last_returned_sum3 = sum3[:]  # کپی از لیست برای نگهداری آخرین مقدار
+            return sum3  # لیست جدید را بازگردان
 
+    # return None  # اگر مقدار برابر بود یا شرایط محقق نشد، None برگردان
 
 def username_chanels(sum3):
     if sum3[0]== 0:
@@ -167,6 +193,7 @@ def username_chanels(sum3):
         return'@chanll_12'
     elif sum3[0]>= 13:
         return
+
 # حلقه اصلی برای به‌روزرسانی قیمت بیت‌کوین و بررسی پیام‌های تلگرام
 async def main():
     bot_token = '7390882203:AAFap8oDw5Ole-dfmX46jZe6oN8Z6zzxmPo'
@@ -217,7 +244,6 @@ async def main():
                     continue
 
             previous_price = current_price
-
 
             # count_with_hour = 4
             if len(messages2) > count_with_hour:
@@ -283,10 +309,8 @@ async def main():
                 send_sum_3_number=append_if_in_range(down_count,sum3,first_list)
                 if send_sum_3_number:
                     sum3_number= f'عدد: {sum3[0]} : {len(sum3)} مرتبه اتفاق افتاد'
-                    # sum3_number = f'سه بار: {sum3[0]} اتفاق افتاد'
                     user_chanel=username_chanels(sum3)
                     await send_to_telegram_async(bot_token, user_chanel, sum3_number)
-                    # sum3 = []
 
             await asyncio.sleep(0.2)  # تاخیر کوتاه بین هر حلقه
 
