@@ -16,6 +16,9 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-published_date']
+        verbose_name='پستها'
+        verbose_name_plural='محصولات'
+
 
     def publish(self):
         self.published_date = timezone.now()
