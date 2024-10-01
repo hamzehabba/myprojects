@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
     author=models.ForeignKey(User,verbose_name='ایجاد کننده:',on_delete=models.CASCADE,related_name='user_product')
     title=models.CharField(max_length=30,verbose_name='عنوان محصول:')
-    image=models.ImageField(verbose_name='تصویر محصول:',upload_to='media/setpic')
+    image=models.ImageField(verbose_name='تصویر محصول:',upload_to='media/setpic',blank=True)
     price=models.FloatField(verbose_name='قیمت محصول:')
     discription=models.TextField(verbose_name='توضیحات:')
     created_date = models.DateTimeField(auto_now_add=True)
