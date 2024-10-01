@@ -10,7 +10,7 @@
             margin: 20px;
         }
         header, footer {
-            background-color: #333;
+            background-color: #100;
             color: white;
             padding: 10px;
             text-align: center;
@@ -28,11 +28,18 @@
             width: 20px;
             height: 20px;
         }
+
+        /* تنظیم Grid برای نمایش پست‌ها در دو ستون */
+        #data {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* دو ستون */
+            grid-gap: 20px; /* فاصله بین پست‌ها */
+        }
+
         .user {
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
-            margin-bottom: 10px;
             background-color: #f9f9f9;
             text-align: right;
             direction: rtl;
@@ -45,10 +52,17 @@
             margin: 5px 0;
         }
         .user img {
-            width: 25vw; /* اندازه یک چهارم عرض صفحه نمایش */
-            height: auto; /* حفظ نسبت تصویر */
+            width: 20vw; /* یک چهارم عرض صفحه نمایش */
+            height: auto;
             border-radius: 5px;
             margin-top: 10px;
+        }
+
+        /* تنظیمات برای سایز صفحه نمایش کوچکتر از 768 پیکسل (مثلاً تبلت یا موبایل) */
+        @media (max-width: 768px) {
+            #data {
+                grid-template-columns: 1fr; /* فقط یک ستون در نمایش‌های کوچکتر */
+            }
         }
     </style>
 </head>
@@ -90,13 +104,11 @@
                     // تولید HTML برای هر کاربر
                     const userHtml = data.map(user => `
                         <div class="user">
-                            <h2 style="padding-bottom: 20px;">${user.title}</h2>
-                            <p style="padding-bottom: 20px;"><strong>توضیحات:</strong> ${user.description}</p>
-                            <p><img src="${user.image_url}" alt="Product Image"></p>
-
-                            <p style="padding-bottom: 20px;"><strong>قیمت:</strong> ${user.price}</p>
-                            <p>تاریخ انتشار: ${user.published_date}</p>
-
+                            <h2>${user.title}</h2>
+                            <p><strong>توضیحات:</strong> ${user.description}</p>
+                            <p><strong>قیمت:</strong> ${user.price}</p>
+                            <p><strong>تاریخ انتشار:</strong> ${user.published_date}</p>
+                            <p><strong>عکس محصول:</strong> <img src="${user.image_url}" alt="Product Image"></p>
                         </div>
                     `).join('');
 
