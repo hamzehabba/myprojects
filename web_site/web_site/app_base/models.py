@@ -31,7 +31,6 @@ class Product(models.Model):
             'description': self.discription,
             'price': self.price,
             'published_date':self.published_date,
-            # 'image':self.image
             'image_url': self.image.url if self.image else None
         }
 
